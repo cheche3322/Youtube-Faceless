@@ -19,6 +19,9 @@ def generate_script(prompt):
         print(f"Rate limit exceeded: {e}")
         sleep(random.uniform(1, 5))  # Wait between 1 to 5 seconds
         return generate_script(prompt)
+    except openai.error.OpenAIError as e:
+        print(f"An OpenAI error occurred: {e}")
+        return "An OpenAI error occurred while generating the script."
     except Exception as e:
         print(f"An error occurred: {e}")
         return "An error occurred while generating the script."
