@@ -1,10 +1,10 @@
-from TTS.api import TTS
+import pyttsx3
 
-def create_voiceover(text, output_path):
-    tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC")
-    tts.tts_to_file(text=text, file_path=output_path)
+def create_voiceover(script, output_file):
+    engine = pyttsx3.init()
+    engine.save_to_file(script, output_file)
+    engine.runAndWait()
 
 if __name__ == "__main__":
-    text = "This is a test voiceover generated using Coqui TTS."
-    output_path = "static/thumbnails/voiceover.wav"
-    create_voiceover(text, output_path)
+    script = "Sample script for voiceover creation."
+    create_voiceover(script, "output.mp3")

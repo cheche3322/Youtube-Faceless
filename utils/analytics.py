@@ -1,9 +1,10 @@
-from googleapiclient.discovery import build
+from apiclient.discovery import build
 from config.config import GOOGLE_ANALYTICS_API_KEY
 
 def get_analytics(view_id, start_date, end_date):
     analytics = build('analyticsreporting', 'v4', developerKey=GOOGLE_ANALYTICS_API_KEY)
-    response = analytics.reports().batchGet(
+
+    reports = analytics.reports().batchGet(
         body={
             'reportRequests': [
                 {
@@ -14,10 +15,12 @@ def get_analytics(view_id, start_date, end_date):
             ]
         }
     ).execute()
-    return response
+
+    return reports.get('reports', [])[0].get('data', {}).get('rows', [])
 
 if __name__ == "__main__":
-    view_id = "YOUR_VIEW_ID"
-    start_date = "2022-01-01"
-    end_date = "2022-12-31"
-    print(get_analytics(view_id, start_date, end_date))
+    view_id = 'YOUR_VIEW_ID' # Replace 'YOUR_VIEW_ID' with your actual View ID
+    start_date = '2022-01-01'
+    end_date = '2022-12-31'
+    analytics_data = get_analytics(view_id, start_date, end_date)
+    print(analytics_data)
