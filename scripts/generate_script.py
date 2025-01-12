@@ -13,14 +13,10 @@ def generate_script(prompt):
             max_tokens=500
         )
         return response.choices[0].text.strip()
-    except openai.error.OpenAIError as e:
-        # Handle OpenAI-specific errors
-        print(f"OpenAI error occurred: {e}")
-        return "An OpenAI error occurred while generating the script."
     except Exception as e:
-        # Handle other exceptions
-        print(f"An unexpected error occurred: {e}")
-        return "An unexpected error occurred while generating the script."
+        # Generic exception handling to cover all error cases
+        print(f"An error occurred: {e}")
+        return "An error occurred while generating the script."
 
 if __name__ == "__main__":
     script = generate_script("Your prompt here")
