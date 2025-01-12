@@ -1,9 +1,9 @@
-import pyttsx3
+from gtts import gTTS
+import os
 
 def create_voiceover(script, output_file):
-    engine = pyttsx3.init()
-    engine.save_to_file(script, output_file)
-    engine.runAndWait()
+    tts = gTTS(text=script, lang='en')
+    tts.save(output_file)
 
 if __name__ == "__main__":
     script = "Sample script for voiceover creation."

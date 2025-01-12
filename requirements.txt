@@ -2,6 +2,6 @@ streamlit
 pandas
 matplotlib
 openai
-pyttsx3
+gtts
 google-api-python-client
 ffmpeg-python
